@@ -1,9 +1,13 @@
 package pizzeria.spring_la_mia_pizzeria_relazioni.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,9 +40,18 @@ public class Pizza {
 
     @Positive(message= "This field cannot be negative")
     private Integer prepTime;
+
+    @OneToMany(mappedBy="pizza")
+    private List<SpecialOffer> specialOffers = new ArrayList<>();
     
-    //Getters
-    
+    public List<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
+    }
+
+    public void setSpecialOffers(List<SpecialOffer> specialoffers) {
+        this.specialOffers = specialoffers;
+    }
+
     public Integer getId(){
         return id;
     }
@@ -63,8 +76,6 @@ public class Pizza {
     public Integer getPrepTime() {
         return prepTime;
     }
-
-    //Setters
 
     public void setId(Integer id){
         this.id = id;

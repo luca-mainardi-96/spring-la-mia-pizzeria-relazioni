@@ -35,6 +35,7 @@
                 </svg>
             </a>
             <a th:href="@{/}" class="btn btn-light">Le nostre pizze</a>
+            <a th:href="@{/}" class="btn btn-light">Le nostre offerte</a>
             <form class="d-flex" methor="get" th:action="@{/}">
                 <input name="keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">
@@ -57,33 +58,6 @@
             </button>
         </div>
     </nav>
-
-    <!-- Card Home-->
-
-    <div class="card shadow-sm" style="width: 18rem;" th:fragment="card-home">
-        <img th:src="${item.photo}" class="card-img-top">
-        <div class="card-body text-center row">
-            <p class="card-text fw-bold col-12" th:text="|Pizza: ${item.name}|"></p>
-            <small class="card-text col-12" th:text="|Ingredienti: ${item.description}|"></small>
-            <p class="card-text fw-bold col-6" th:text="|Prezzo: ${item.price} €|"></p>
-            <button class="btn btn-primary col-6">
-                <a th:href="@{/details/{id}(id=${item.id})}">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
-                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                        class="bi bi-pizza-slice" viewBox="0 0 16 16">
-                    
-                        <path d="M2 6 L8 15 L14 6 A11 5 0 0 0 2 6 Z"/>
-
-                        <circle cx="5.8" cy="9.1" r=".6" fill="currentColor" stroke="none"/>
-                        <circle cx="8.8" cy="7.6" r=".6" fill="currentColor" stroke="none"/>
-
-                        <path d="M6.2 10.8 Q7.0 10.1 7.8 10.8 M7.0 10.8 L7.0 11.4" fill="none"/>
-                        <path d="M9.8 9.5 Q10.6 8.8 11.4 9.5 M10.6 9.5 L10.6 10.1" fill="none"/>
-                    </svg> 
-                </a>
-            </button>
-        </div>
-    </div>
 
     <!-- Card Details -->
 

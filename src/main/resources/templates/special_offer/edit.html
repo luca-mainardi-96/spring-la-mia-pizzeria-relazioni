@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav th:replace="~{fragments :: navbar('Offers')}"></nav>
+
+    <div class="container">
+        <div class="row">
+            <h1>Inserisci i dati dell'offerta</h1>
+            <form th:action="${editMode}? @{/offer/edit/{id}(id=${offer.id})} : @{/offer/edit}"
+                    id="offer-form"
+                    method="post"
+                    th:object="${offer}"
+                    class="row g-3">
+
+                <input type="hidden" th:field="*{pizza.id}" id="pizza">
+
+                <div class="col-12">
+                    <input type="text" 
+                            class="form-control" 
+                            placeholder="Nome offerta"
+                            th:field="*{title}">
+                    <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <input type="date" 
+                            class="form-control" 
+                            placeholder="Data di inizio offerta"
+                            th:field="*{offerStart}">
+                    <div th:if="${#fields.hasErrors('offerStart')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('offerStart')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <input type="date" 
+                            class="form-control" 
+                            placeholder="Data di fine offerta"
+                            th:field="*{offerEnd}">
+                    <div th:if="${#fields.hasErrors('offerEnd')}" class="invalid-feedback">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('offerEnd')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event" viewBox="0 0 16 16">
+                            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+</body>
+</html>
