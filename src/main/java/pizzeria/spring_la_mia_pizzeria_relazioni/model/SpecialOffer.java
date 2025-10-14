@@ -2,6 +2,8 @@ package pizzeria.spring_la_mia_pizzeria_relazioni.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,8 +31,10 @@ public class SpecialOffer {
     private String title;
 
     @NotNull(message="This field cannot be empty")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate offerStart;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate offerEnd;
 
     @ManyToOne

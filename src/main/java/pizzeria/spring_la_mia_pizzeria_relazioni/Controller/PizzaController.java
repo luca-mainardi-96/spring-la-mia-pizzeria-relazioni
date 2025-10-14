@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import pizzeria.spring_la_mia_pizzeria_relazioni.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_relazioni.model.SpecialOffer;
+import pizzeria.spring_la_mia_pizzeria_relazioni.repository.IngredientRepository;
 import pizzeria.spring_la_mia_pizzeria_relazioni.repository.PizzaRepository;
 
 @Controller
@@ -26,6 +27,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository repository;
+    
+    @Autowired
+    private IngredientRepository ingredientRepository;
 
     @GetMapping("")
     public String filter(@RequestParam(name="keyword", required=false) String keyword, Model model){
@@ -57,6 +61,7 @@ public class PizzaController {
     @GetMapping("/insert")
     public String showInsertForm(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredientList", ingredientRepository.findAll());
         return "pizza/insert";
     }
 
@@ -66,6 +71,7 @@ public class PizzaController {
                         Model model) {
         
         if(bindingResult.hasErrors()){
+            model.addAttribute("ingredientList", ingredientRepository.findAll());
             return "pizza/insert";
         }
 

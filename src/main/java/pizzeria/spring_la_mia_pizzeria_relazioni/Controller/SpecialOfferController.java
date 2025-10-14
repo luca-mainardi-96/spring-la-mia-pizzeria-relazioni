@@ -1,5 +1,7 @@
 package pizzeria.spring_la_mia_pizzeria_relazioni.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +69,20 @@ public class SpecialOfferController {
 
         repository.save(offer);
         return "redirect:/pizza/details/" + offer.getPizza().getId();
+    }
+
+    @GetMapping("/view")
+    public String view(Model model){
+        List<SpecialOffer> list;
+        list = repository.findAll();
+        model.addAttribute("list", list);
+        return "special_offer/view";
+    }
+
+    @PostMapping("delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        repository.deleteById(id);
+        return "redirect:/offer/view";
     }
 
 }
