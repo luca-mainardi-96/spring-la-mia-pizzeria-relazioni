@@ -32,7 +32,7 @@ public class PizzaController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String filter(@RequestParam(name="keyword", required=false) String keyword, Model model){
         List<Pizza> result;
         if(keyword == null || keyword.isBlank()){
@@ -77,17 +77,17 @@ public class PizzaController {
         }
 
         repository.save(formPizza);
-        return "redirect:/";
+        return "redirect:/pizza";
     }    
 
-    @PostMapping("delete/{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
         Ingredient ing = ingredientRepository.findById(id).get();
         for(Pizza pizza : ing.getPizzas()){
             pizza.getIngredients().remove(ing);
         }
         repository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/pizza";
     }
 
     @GetMapping("/edit/{id}")
@@ -111,7 +111,7 @@ public class PizzaController {
     }
 
     repository.save(formPizza);
-    return "redirect:/";
+    return "redirect:/pizza";
     }
 
     @GetMapping("/details/{id}/offer")
@@ -124,4 +124,5 @@ public class PizzaController {
         return "/special_offer/edit";
         
     }
+
 }
