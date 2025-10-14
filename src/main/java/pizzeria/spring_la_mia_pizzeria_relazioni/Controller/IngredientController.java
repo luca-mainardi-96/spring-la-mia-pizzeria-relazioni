@@ -1,6 +1,5 @@
 package pizzeria.spring_la_mia_pizzeria_relazioni.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +26,22 @@ public class IngredientController {
 
     @GetMapping("/")
     public String show(Model model){
-        List<Ingredient> list = new ArrayList<>();
-        model.addAttribute("list", list);
-        return "/ingredients/ingredients";
+        List<Ingredient> list = repository.findAll();
+        model.addAttribute("ingredients", list);
+        return "ingredients/ingredients";
     }
 
     @GetMapping("/edit")
     public String edit(Model model){
         model.addAttribute("ingredient", new Ingredient());
         model.addAttribute("editMode", false);
-        return "/ingredients/edit";
+        return "ingredients/edit";
     }
 
     @PostMapping("/edit")
     public String create(@Valid @ModelAttribute("ingredient") Ingredient formIngredient, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return "/ingredients/edit";
+            return "ingredients/edit";
         }
 
         repository.save(formIngredient);
@@ -54,7 +53,7 @@ public class IngredientController {
         Ingredient ing = repository.findById(id).get();
         model.addAttribute("editMode", true);
         model.addAttribute("ingredient", ing);
-        return "/ingredients/ingredients"; 
+        return "ingredients/ingredients"; 
     }
 
     @PostMapping("/edit/{id}")
@@ -69,5 +68,9 @@ public class IngredientController {
         return "redirect:/";
     }
 
-    
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        repository.deleteById(id);
+        return "redirect:ingredients/ingredients";
+    }
 }

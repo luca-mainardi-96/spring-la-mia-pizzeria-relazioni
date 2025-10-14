@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
+import pizzeria.spring_la_mia_pizzeria_relazioni.model.Ingredient;
 import pizzeria.spring_la_mia_pizzeria_relazioni.model.Pizza;
 import pizzeria.spring_la_mia_pizzeria_relazioni.model.SpecialOffer;
 import pizzeria.spring_la_mia_pizzeria_relazioni.repository.IngredientRepository;
 import pizzeria.spring_la_mia_pizzeria_relazioni.repository.PizzaRepository;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/pizza")
 public class PizzaController {
 
     @Autowired
@@ -31,7 +32,7 @@ public class PizzaController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    @GetMapping("")
+    @GetMapping("/")
     public String filter(@RequestParam(name="keyword", required=false) String keyword, Model model){
         List<Pizza> result;
         if(keyword == null || keyword.isBlank()){
@@ -81,6 +82,10 @@ public class PizzaController {
 
     @PostMapping("delete/{id}")
     public String delete(@PathVariable("id") Integer id){
+        Ingredient ing = ingredientRepository.findById(id).get();
+        for(Pizza pizza : ing.getPizzas()){
+            pizza.getIngredients().remove(ing);
+        }
         repository.deleteById(id);
         return "redirect:/";
     }
