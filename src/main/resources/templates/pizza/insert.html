@@ -15,115 +15,123 @@
             <form class="row g-3"  
                 id="pizza-form" 
                 th:object="${pizza}" 
-                th:action="@{/insert}" 
+                th:action="@{/pizza/insert}" 
                 method="post">
 
-                <div class="col-12">
-                    <input name="name" 
-                        type="text" 
-                        class="form-control" 
-                        th:field="*{name}" 
-                        placeholder="Inserisci il nome della nuova pizza"
-                        th:errorClass="is-invalid">
-
-                    <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <input name="description" 
-                        type="text" 
-                        class="form-control" 
-                        th:field="*{description}" 
-                        placeholder="Inserisci gli ingredienti della nuova pizza"
-                        th:errorClass="is-invalid">
-
-                    <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <input name="doughType" 
-                        type="text" 
-                        class="form-control" 
-                        th:field="*{doughType}" 
-                        placeholder="Inserisci il tipo di impasto della nuova pizza"
-                        th:errorClass="is-invalid">
-
-                    <div th:if="${#fields.hasErrors('doughType')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('doughType')}" th:text="${err}"></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <input name="photo" 
-                        type="text" 
-                        class="form-control" 
-                        th:field="*{photo}" 
-                        placeholder="Inserisci l'URL della foto che mostra la nuova pizza"
-                        th:errorClass="is-invalid">
-
-                    <div th:if="${#fields.hasErrors('photo')}" class="invalid-feedback">
-                        <ul>
-                            <li th:each="err : ${#fields.errors('photo')}" th:text="${err}"></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="col-5">
-                        <input name="prepTime" 
-                            type="number" 
+                <div class="col-8">
+                    <h4>Pizza</h4>
+                    <div class="col-12 py-2">
+                        <input name="name" 
+                            type="text" 
                             class="form-control" 
-                            th:field="*{prepTime}" 
-                            placeholder="Inserisci il tempo di preparazione stimato della nuova pizza"
+                            th:field="*{name}" 
+                            placeholder="Inserisci il nome della nuova pizza"
                             th:errorClass="is-invalid">
 
-                        <div th:if="${#fields.hasErrors('prepTime')}" class="invalid-feedback">
+                        <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
                             <ul>
-                                <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                                <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="col-5">
-                        <input name="price" 
-                            type="number" 
+                    <div class="col-12 py-2">
+                        <input name="doughType" 
+                            type="text" 
                             class="form-control" 
-                            th:field="*{price}" 
-                            placeholder="Inserisci il prezzo della nuova pizza"
+                            th:field="*{doughType}" 
+                            placeholder="Inserisci il tipo di impasto della nuova pizza"
                             th:errorClass="is-invalid">
 
-                        <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+                        <div th:if="${#fields.hasErrors('doughType')}" class="invalid-feedback">
                             <ul>
-                                <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+                                <li th:each="err : ${#fields.errors('doughType')}" th:text="${err}"></li>
                             </ul>
                         </div>
                     </div>
-                    
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-outline-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
-                                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                                class="bi bi-pizza-slice" viewBox="0 0 16 16">
+
+                    <div class="col-12 py-2">
+                        <input name="photo" 
+                            type="text" 
+                            class="form-control" 
+                            th:field="*{photo}" 
+                            placeholder="Inserisci l'URL della foto che mostra la nuova pizza"
+                            th:errorClass="is-invalid">
+
+                        <div th:if="${#fields.hasErrors('photo')}" class="invalid-feedback">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('photo')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-12 py-2">
+                        <div class="row">
+                            <div class="col-5">
+                                <input name="prepTime" 
+                                    type="number" 
+                                    class="form-control" 
+                                    th:field="*{prepTime}" 
+                                    placeholder="Inserisci il tempo di preparazione stimato della nuova pizza"
+                                    th:errorClass="is-invalid">
+
+                                <div th:if="${#fields.hasErrors('prepTime')}" class="invalid-feedback">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-5">
+                                <input name="price" 
+                                    type="number" 
+                                    class="form-control" 
+                                    th:field="*{price}" 
+                                    placeholder="Inserisci il prezzo della nuova pizza"
+                                    th:errorClass="is-invalid">
+
+                                <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
                             
-                                <path d="M2 6 L8 15 L14 6 A11 5 0 0 0 2 6 Z"/>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-outline-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"
+                                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                                        class="bi bi-pizza-slice" viewBox="0 0 16 16">
+                                    
+                                        <path d="M2 6 L8 15 L14 6 A11 5 0 0 0 2 6 Z"/>
 
-                                <circle cx="5.8" cy="9.1" r=".6" fill="currentColor" stroke="none"/>
-                                <circle cx="8.8" cy="7.6" r=".6" fill="currentColor" stroke="none"/>
+                                        <circle cx="5.8" cy="9.1" r=".6" fill="currentColor" stroke="none"/>
+                                        <circle cx="8.8" cy="7.6" r=".6" fill="currentColor" stroke="none"/>
 
-                                <path d="M6.2 10.8 Q7.0 10.1 7.8 10.8 M7.0 10.8 L7.0 11.4" fill="none"/>
-                                <path d="M9.8 9.5 Q10.6 8.8 11.4 9.5 M10.6 9.5 L10.6 10.1" fill="none"/>
-                            </svg>
-                        </button>
+                                        <path d="M6.2 10.8 Q7.0 10.1 7.8 10.8 M7.0 10.8 L7.0 11.4" fill="none"/>
+                                        <path d="M9.8 9.5 Q10.6 8.8 11.4 9.5 M10.6 9.5 L10.6 10.1" fill="none"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4>Ingredients</h4>
+                    <div class="form-check" th:each="ing : ${ingredientsList}">
+                        <input class="form-check-input" 
+                                type="checkbox" 
+                                th:id="|ingredients_${ing.id}|"
+                                th:value="${ing.id}" 
+                                th:field="*{ingredients}">
+                        <label th:for="|ingredients_${ing.id}|" 
+                                class="form-check-label" 
+                                th:text="${ing.name}"></label>
+                    </div>
+                    <div th:if="${#fields.hasErrors('ingredients')}" class="text-danger">
+                        <ul class="mb-0">
+                            <li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
+                        </ul>
                     </div>
                 </div>
             </form>

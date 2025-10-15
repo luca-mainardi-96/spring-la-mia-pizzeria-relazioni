@@ -13,9 +13,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -28,10 +28,6 @@ public class Pizza {
 
     @NotBlank(message = "This field cannot be blank")
     private String name;
-
-    @NotBlank(message = "This field cannot be blank")
-    @Size(max = 200, message = "This field cannot exceed 200 characters")
-    private String description;
 
     private String photo;
 
@@ -49,7 +45,8 @@ public class Pizza {
 
     @ManyToMany
     @JoinTable(name = "pizzas_ingredients", joinColumns = @JoinColumn(name="pizza_id"), inverseJoinColumns = @JoinColumn(name="ingredient_id"))
-    private List<Ingredient> ingredients;
+    @NotEmpty(message="You must select at least one element")
+    private List<Ingredient> ingredients = new ArrayList<>();
     
     public List<SpecialOffer> getSpecialOffers() {
         return specialOffers;
@@ -66,9 +63,7 @@ public class Pizza {
     public String getName() {
         return name;
     }
-    public String getDescription() {
-        return description;
-    }
+    
     public String getPhoto() {
         return photo;
     }
@@ -91,9 +86,7 @@ public class Pizza {
     public void setName(String name) {
         this.name = name;
     }
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    
     public void setPhoto(String photo) {
         this.photo = photo;
     }
@@ -118,3 +111,8 @@ public class Pizza {
     }
                 
 }
+
+
+
+
+

@@ -62,7 +62,7 @@ public class PizzaController {
     @GetMapping("/insert")
     public String showInsertForm(Model model) {
         model.addAttribute("pizza", new Pizza());
-        model.addAttribute("ingredientList", ingredientRepository.findAll());
+        model.addAttribute("ingredientsList", ingredientRepository.findAll());
         return "pizza/insert";
     }
 
@@ -72,7 +72,7 @@ public class PizzaController {
                         Model model) {
         
         if(bindingResult.hasErrors()){
-            model.addAttribute("ingredientList", ingredientRepository.findAll());
+            model.addAttribute("ingredientsList", ingredientRepository.findAll());
             return "pizza/insert";
         }
 
@@ -82,9 +82,9 @@ public class PizzaController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
-        Ingredient ing = ingredientRepository.findById(id).get();
-        for(Pizza pizza : ing.getPizzas()){
-            pizza.getIngredients().remove(ing);
+        Pizza pizza = repository.findById(id).get();
+        for(Ingredient ing : pizza.getIngredients()){
+            ing.getPizzas().remove(pizza);
         }
         repository.deleteById(id);
         return "redirect:/pizza";
@@ -93,7 +93,7 @@ public class PizzaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
         model.addAttribute("pizza", repository.findById(id).get());
-        model.addAttribute("ingredientList", ingredientRepository.findAll());
+        model.addAttribute("ingredientsList", ingredientRepository.findAll());
         return "pizza/edit";
     }
 
@@ -108,6 +108,7 @@ public class PizzaController {
     }
                             
     if(bindingResult.hasErrors()){
+        model.addAttribute("ingredientsList", ingredientRepository.findAll());
         return "pizza/edit";
     }
 

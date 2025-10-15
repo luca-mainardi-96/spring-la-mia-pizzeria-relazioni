@@ -72,7 +72,10 @@
             <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title" th:text="${pizza.name}"></h5>
-                <p class="card-text" th:text="|Ingredienti: ${pizza.description}|"></p>
+                <p class="card-text">
+                    Ingredienti: 
+                    <span th:each="ing : ${pizza.ingredients}" th:text="|${ing.name}, |"></span>
+                </p>
                 <p class="card-text" th:text="|Impasto: ${pizza.doughType}|"></p>
                 <p class="card-text" th:text="|Tempo di preparazione: ${pizza.prepTime} minuti|"></p>
                 <p class="card-text" th:text="|Prezzo: ${pizza.price} €|"></p>

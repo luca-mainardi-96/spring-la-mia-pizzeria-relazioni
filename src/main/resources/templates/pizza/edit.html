@@ -15,11 +15,12 @@
             <form class="row g-3"  
                 id="pizza-form" 
                 th:object="${pizza}" 
-                th:action="@{/edit/{id}(id=${pizza.id})}" 
+                th:action="@{/pizza/edit/{id}(id=${pizza.id})}"
                 method="post">
 
                 <div class="col-8">
-                    <div class="col-12">
+                    <h4>Pizza</h4>
+                    <div class="col-12 py-2">
                         <input name="name" 
                             type="text" 
                             class="form-control" 
@@ -34,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 py-2">
                         <input name="doughType" 
                             type="text" 
                             class="form-control" 
@@ -49,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 py-2">
                         <input name="photo" 
                             type="text" 
                             class="form-control" 
@@ -64,7 +65,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 py-2">
                         <div class="row">
                             <div class="col-5">
                                 <input name="prepTime" 
@@ -118,9 +119,19 @@
                 <div class="col-4">
                     <h4>Ingredients</h4>
                     <div class="form-check" th:each="ing : ${ingredientsList}">
-                        <input class="form-check-input" type="checkbox" th:id="|ingredients_${ing.id}|"
-                                th:value="${ing.id}" th:field="*{ingredients}">
-                        <label for="|ingredients_${ing.id}|" class="form-check-label"></label>
+                        <input class="form-check-input" 
+                                type="checkbox" 
+                                th:id="|ingredients_${ing.id}|"
+                                th:value="${ing.id}" 
+                                th:field="*{ingredients}">
+                        <label th:for="|ingredients_${ing.id}|" 
+                                class="form-check-label" 
+                                th:text="${ing.name}"></label>
+                    </div>
+                    <div th:if="${#fields.hasErrors('ingredients')}" class="text-danger">
+                        <ul class="mb-0">
+                            <li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
+                        </ul>
                     </div>
                 </div>
             </form>
