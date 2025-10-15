@@ -48,7 +48,7 @@ public class SpecialOfferController {
         formOffer.setPizza(pizza);
 
         repository.save(formOffer);
-        return "redirect:/details/" + formOffer.getPizza().getId();
+        return "redirect:/pizza/details/" + formOffer.getPizza().getId();
     }
     
     @GetMapping("/edit/{id}")

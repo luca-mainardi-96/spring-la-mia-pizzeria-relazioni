@@ -45,7 +45,7 @@ public class IngredientController {
         }
 
         repository.save(formIngredient);
-        return "redirect:/";
+        return "redirect:/ingredients/";
     }
 
     @GetMapping("/edit/{id}")
@@ -53,7 +53,7 @@ public class IngredientController {
         Ingredient ing = repository.findById(id).get();
         model.addAttribute("editMode", true);
         model.addAttribute("ingredient", ing);
-        return "ingredients/ingredients"; 
+        return "ingredients/edit"; 
     }
 
     @PostMapping("/edit/{id}")
@@ -65,12 +65,12 @@ public class IngredientController {
         }
 
         repository.save(formIng);
-        return "redirect:/";
+        return "redirect:/ingredients/";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
         repository.deleteById(id);
-        return "redirect:ingredients/ingredients";
+        return "redirect:/ingredients/";
     }
 }

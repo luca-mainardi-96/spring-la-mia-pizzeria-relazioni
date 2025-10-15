@@ -93,6 +93,7 @@ public class PizzaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
         model.addAttribute("pizza", repository.findById(id).get());
+        model.addAttribute("ingredientList", ingredientRepository.findAll());
         return "pizza/edit";
     }
 
